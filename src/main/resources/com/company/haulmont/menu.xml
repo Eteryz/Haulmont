@@ -4,6 +4,9 @@
     <menu id="application" caption="msg://com.company.haulmont/menu.application" insertBefore="administration">
         <item screen="User.browse" caption="msg://com.company.haulmont.screen.user/UserBrowse.caption"/>
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="Filial.browse" caption="msg://com.company.haulmont.screen.filial/filialBrowse.menu"/>
+        <item screen="Client.browse" caption="msg://com.company.haulmont.screen.client/clientBrowse.menu"/>
+        <item screen="Contract.browse" caption="msg://com.company.haulmont.screen.contract/contractBrowse.menu"/>
     </menu>
 
 </menu-config>
