@@ -30,8 +30,9 @@
                 <column width="350px">
                     <textField id="fullNameField" property="fullName"/>
                     <textField id="emailField" property="email"/>
-                    <fileUpload id="passportField" property="passport"/>
                     <textField id="phoneField" property="phone"/>
+                    <fileUpload id="passportField" property="passport" align="MIDDLE_LEFT"/>
+                    <image id="imageField" scaleMode="SCALE_DOWN"/>
                 </column>
             </form>
         </scrollBox>
