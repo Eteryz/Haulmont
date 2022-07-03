@@ -48,8 +48,8 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="dataConclusion"/>
-                <column id="validity"/>
+                <column id="dateStart"/>
+                <column id="dateEnd"/>
                 <column id="sumInsured"/>
                 <column id="typeInsured"/>
                 <column id="tariffRate"/>

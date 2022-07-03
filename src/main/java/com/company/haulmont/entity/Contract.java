@@ -13,7 +13,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -29,14 +29,13 @@ public class Contract {
     @Id
     private UUID id;
 
-    @Column(name = "DATA_CONCLUSION", nullable = false)
     @NotNull
-    private LocalDate dataConclusion;
+    @Column(name = "DATE_START", nullable = false)
+    private LocalDateTime dateStart;
 
-    //TODO Хранить дату завершения договора, либо поменять тип хранения, что бы хранить датой.
-    @Column(name = "VALIDITY", nullable = false)
     @NotNull
-    private LocalDate validity;
+    @Column(name = "DATE_END", nullable = false)
+    private LocalDateTime dateEnd;
 
     @Column(name = "SUM_INSURED", precision = 19, scale = 2)
     private BigDecimal sumInsured;
@@ -94,20 +93,28 @@ public class Contract {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public void setDateStart(LocalDateTime dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public LocalDateTime getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateEnd(LocalDateTime dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public LocalDateTime getDateEnd() {
+        return dateEnd;
+    }
+
     public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
         this.client = client;
-    }
-
-    public void setDataConclusion(LocalDate dataConclusion) {
-        this.dataConclusion = dataConclusion;
-    }
-
-    public LocalDate getDataConclusion() {
-        return dataConclusion;
     }
 
     public Filial getFilial() {
@@ -148,14 +155,6 @@ public class Contract {
 
     public void setSumInsured(BigDecimal sumInsured) {
         this.sumInsured = sumInsured;
-    }
-
-    public LocalDate getValidity() {
-        return validity;
-    }
-
-    public void setValidity(LocalDate validity) {
-        this.validity = validity;
     }
 
     public Date getDeletedDate() {

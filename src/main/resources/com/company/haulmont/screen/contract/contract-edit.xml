@@ -31,8 +31,9 @@
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="contractDc">
                 <column width="350px">
-                    <dateField id="dataConclusionField" property="dataConclusion"/>
-                    <dateField id="validityField" property="validity"/>
+                    <dateField id="dataConclusionField" property="dateStart"/>
+                    <dateField id="validityField" property="dateEnd" dateFormat="dd/MM/yy"
+                    />
                     <textField id="sumInsuredField" property="sumInsured"/>
                     <textField id="typeInsuredField" property="typeInsured"/>
                     <textField id="tariffRateField" property="tariffRate"/>
