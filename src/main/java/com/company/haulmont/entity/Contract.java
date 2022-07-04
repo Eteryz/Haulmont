@@ -220,4 +220,18 @@ public class Contract {
     public void setId(UUID id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Contract{" +"\n"+
+                "dateStart=" + dateStart +"\n"+
+                "dateEnd=" + dateEnd +"\n"+
+                "sumInsured=" + sumInsured +"\n"+
+                "typeInsured=" + typeInsured +"\n"+
+                "tariffRate=" + tariffRate +"\n"+
+                "risksInsured=" + risksInsured +"\n"+
+                "filial=" + filial.getName() +"\n"+
+                "client=" + client.getFullName() +"\n"+
+                '}';
+    }
 }

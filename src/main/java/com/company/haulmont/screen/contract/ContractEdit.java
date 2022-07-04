@@ -1,6 +1,7 @@
 package com.company.haulmont.screen.contract;
 
 import com.company.haulmont.app.EmailServiceBean;
+import io.jmix.email.EmailException;
 import io.jmix.ui.Dialogs;
 import io.jmix.ui.action.DialogAction;
 import io.jmix.ui.component.Component;
@@ -12,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 
 @UiController("Contract.edit")
@@ -47,7 +47,7 @@ public class ContractEdit extends StandardEditor<Contract> {
                                 public void actionPerform(Component component) {
                                     try {
                                         emailServiceBean.sendByEmail(getEditedEntity());
-                                    } catch (IOException e) {
+                                    } catch (EmailException e) {
                                         log.error("Error sending email", e);
                                     }
                                 }
