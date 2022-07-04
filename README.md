@@ -7,9 +7,9 @@
  + [Примечание](#Note)
  
 ##### <a name="Task"></a> База данных
-![Схема базы данных](src/main/resources/db.png "Логическая схема базы данных")
+![Схема базы данных](src/main/resources/imageDB/db.png "Логическая схема базы данных")
 
-![Схема базы данных](src/main/resources/dbEn.png "Физическая схема базы данных")
+![Схема базы данных](src/main/resources/imageDB/dbEn.png "Физическая схема базы данных")
 
 ##### <a name="Stack"></a> Стек
 + Java 11
