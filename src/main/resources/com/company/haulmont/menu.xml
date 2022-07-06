@@ -7,6 +7,8 @@
         <item screen="Filial.browse" caption="msg://com.company.haulmont.screen.filial/filialBrowse.menu"/>
         <item screen="Client.browse" caption="msg://com.company.haulmont.screen.client/clientBrowse.menu"/>
         <item screen="Contract.browse" caption="msg://com.company.haulmont.screen.contract/contractBrowse.menu"/>
+        <item screen="ContractClient.browse"
+              caption="msg://com.company.haulmont.screen.contract/contractClientBrowse.menu"/>
     </menu>
 
 </menu-config>

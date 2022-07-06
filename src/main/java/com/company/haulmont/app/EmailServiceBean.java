@@ -27,10 +27,10 @@ public class EmailServiceBean {
                 stringBuilder
                 .append(key)
                 .append(":\t'")
-                .append(value[1].toString())
+                .append(value[1])
                 .append("'\t(")
                 .append("previous value '")
-                .append(value[0].toString())
+                .append(value[0])
                 .append("')")
                 .append("\n"));
         sendByEmail(email,"Changes in the insurance contract!", stringBuilder.toString());

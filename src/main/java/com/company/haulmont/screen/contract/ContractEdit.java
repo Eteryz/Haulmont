@@ -18,10 +18,10 @@ import java.util.Map;
 public class ContractEdit extends StandardEditor<Contract> {
 
     /*
-    Contains field names and values that have been changed in the record
-    KEY - names changed attributes
-    VALUE - an array containing the {old, new} attribute values
-     */
+        Contains field names and values that have been changed in the record
+        KEY - names changed attributes
+        VALUE - an array containing the {old, new} attribute values
+         */
     private final Map<String, Object[]> mapChangesInTheRecord = new HashMap<>();
 
     //contract creation flag

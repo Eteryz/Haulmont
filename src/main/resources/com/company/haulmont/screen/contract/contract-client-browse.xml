@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://contractClientBrowse.caption"
+        focusComponent="contractsTable">
+    <data readOnly="true">
+        <collection id="contractsDc"
+                    class="com.company.haulmont.entity.Contract">
+            <fetchPlan extends="_base">
+                <property name="filial" fetch="AUTO" fetchPlan="_base"/>
+                <property name="client" fetch="AUTO" fetchPlan="_base"/>
+            </fetchPlan>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+
+    <layout expand="contractsTable" spacing="true">
+        <entityPicker id="clientField" metaClass="Client">
+            <actions>
+                <action id="entityLookup" type="entity_lookup"/>
+                <action id="entityClear" type="entity_clear"/>
+            </actions>
+        </entityPicker>
+        <groupTable id="contractsTable"
+                    width="100%"
+                    dataContainer="contractsDc">
+
+            <actions>
+
+            </actions>
+            <columns>
+                <column id="id"/>
+                <column id="dateStart"/>
+                <column id="dateEnd"/>
+                <column id="sumInsured"/>
+                <column id="typeInsured"/>
+                <column id="tariffRate"/>
+                <column id="risksInsured"/>
+                <column id="filial"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                  alwaysVisible="true">
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
