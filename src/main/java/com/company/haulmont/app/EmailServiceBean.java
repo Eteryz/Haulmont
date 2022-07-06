@@ -17,13 +17,7 @@ public class EmailServiceBean {
     private Emailer emailer;
 
     public void sendByEmail(Contract editedEntity) throws EmailException {
-        EmailInfo emailInfo = EmailInfoBuilder.create()
-                .setAddresses(editedEntity.getClient().getEmail())
-                .setSubject("Insurance contract")
-                .setFrom(null)
-                .setBody(editedEntity.toString())
-                .build();
-        emailer.sendEmail(emailInfo);
+        sendByEmail(editedEntity.getClient().getEmail(),"Insurance contract", editedEntity.toString());
     }
 
     public void sendByEmail(Map<String, Object[]> map, String email) throws EmailException {
@@ -39,13 +33,16 @@ public class EmailServiceBean {
                 .append(value[0].toString())
                 .append("')")
                 .append("\n"));
+        sendByEmail(email,"Changes in the insurance contract!", stringBuilder.toString());
+    }
 
+    public void sendByEmail(String email,String subject, String body) throws EmailException {
         EmailInfo emailInfo = EmailInfoBuilder.create()
                 .setAddresses(email)
-                .setSubject("Changes in the insurance contract!")
+                .setSubject(subject)
                 .setFrom(null)
-                .setBody(stringBuilder.toString())
+                .setBody(body)
                 .build();
-        emailer.sendEmail(emailInfo);
+        emailer.sendEmailAsync(emailInfo);
     }
 }

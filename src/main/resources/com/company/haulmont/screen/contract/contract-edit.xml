@@ -43,6 +43,12 @@
                             <action id="entityClear" type="entity_clear"/>
                         </actions>
                     </entityPicker>
+                    <entityPicker id="clientField" property="client">
+                        <actions>
+                            <action id="entityLookup" type="entity_lookup"/>
+                            <action id="entityClear" type="entity_clear"/>
+                        </actions>
+                    </entityPicker>
                 </column>
             </form>
         </scrollBox>

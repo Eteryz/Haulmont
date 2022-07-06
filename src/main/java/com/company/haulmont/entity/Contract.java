@@ -13,6 +13,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
@@ -35,7 +36,7 @@ public class Contract {
 
     @NotNull
     @Column(name = "DATE_END", nullable = false)
-    private LocalDateTime dateEnd;
+    private LocalDate dateEnd;
 
     @Column(name = "SUM_INSURED", precision = 19, scale = 2)
     private BigDecimal sumInsured;
@@ -93,20 +94,20 @@ public class Contract {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public LocalDate getDateEnd() {
+        return dateEnd;
+    }
+
     public void setDateStart(LocalDateTime dateStart) {
         this.dateStart = dateStart;
     }
 
     public LocalDateTime getDateStart() {
         return dateStart;
-    }
-
-    public void setDateEnd(LocalDateTime dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
-    public LocalDateTime getDateEnd() {
-        return dateEnd;
     }
 
     public Client getClient() {
