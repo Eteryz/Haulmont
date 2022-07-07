@@ -44,7 +44,8 @@ public class Contract {
     @Column(name = "DATE_END", nullable = false)
     private LocalDate dateEnd;
 
-    @Column(name = "SUM_INSURED", precision = 19, scale = 2)
+    @NotNull
+    @Column(name = "SUM_INSURED", nullable = false, precision = 19, scale = 2)
     private BigDecimal sumInsured;
 
     @Column(name = "TYPE_INSURED", nullable = false)
