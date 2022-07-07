@@ -1,12 +1,18 @@
 package com.company.haulmont.screen.contract;
 
 import com.company.haulmont.entity.Contract;
+import io.jmix.email.EmailException;
+import io.jmix.emailtemplates.EmailTemplates;
+import io.jmix.emailtemplates.exception.ReportParameterTypeChangedException;
+import io.jmix.emailtemplates.exception.TemplateNotFoundException;
 import io.jmix.ui.component.DateField;
 import io.jmix.ui.component.HasValue;
+import io.jmix.ui.model.DataContext;
 import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -24,7 +30,31 @@ public class ContractEdit extends StandardEditor<Contract> {
             KEY - names changed attributes
             VALUE - an array containing the {old, new} attribute values
              */
-    private static final Map<String, Object[]> mapChangesInTheRecord = new HashMap<>();
+    private final Map<String, Object[]> mapChangesInTheRecord = new HashMap<>();
+
+    //contract creation flag
+    private boolean justCreated;
+
+    @Inject
+    EmailTemplates emailTemplates;
+
+    public static final String TEMPLATE2_CODE = "edit-contract";
+
+    @Subscribe
+    public void onInitEntity(InitEntityEvent<Contract> event) {
+        justCreated = true;
+    }
+
+    @Subscribe(target = Target.DATA_CONTEXT)
+    public void onPostCommit(DataContext.PostCommitEvent event) throws TemplateNotFoundException, EmailException, ReportParameterTypeChangedException {
+        if (!justCreated) {
+            emailTemplates.buildFromTemplate(TEMPLATE2_CODE)
+                    .setTo(getEditedEntity().getClient().getEmail())
+                    .setBodyParameter("contract", getEditedEntity())
+                    .setBodyParameter("str", editContractToString(mapChangesInTheRecord))
+                    .sendEmail();
+        }
+    }
 
     @Autowired
     private DateField<LocalDateTime> dateStartField;
@@ -48,7 +78,18 @@ public class ContractEdit extends StandardEditor<Contract> {
             dateStartField.setValue(LocalDateTime.now());
     }
 
-    public static Map<String, Object[]> getMapChangesInTheRecord() {
-        return new HashMap<>(mapChangesInTheRecord);
+    private String editContractToString(Map<String, Object[]> map){
+        StringBuilder stringBuilder = new StringBuilder();
+        map.forEach((key, value) ->
+                stringBuilder
+                        .append(key)
+                        .append("\t'")
+                        .append(value[1])
+                        .append("'\t(")
+                        .append("previous value '")
+                        .append(value[0])
+                        .append("')")
+                        .append("\n"));
+        return stringBuilder.toString();
     }
 }
