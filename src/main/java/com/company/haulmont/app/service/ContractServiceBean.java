@@ -1,4 +1,4 @@
-package com.company.haulmont.app;
+package com.company.haulmont.app.service;
 
 import com.company.haulmont.entity.Contract;
 import io.jmix.core.DataManager;

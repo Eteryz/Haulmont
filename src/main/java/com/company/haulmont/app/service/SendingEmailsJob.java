@@ -1,4 +1,4 @@
-package com.company.haulmont.app;
+package com.company.haulmont.app.service;
 
 import io.jmix.core.security.Authenticated;
 import io.jmix.email.EmailException;
