@@ -24,11 +24,17 @@ import java.util.UUID;
 })
 @Entity
 public class Contract {
+
     @InstanceName
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @JmixGeneratedValue
+    @Column(name = "NUMBER_", nullable = false, unique = true)
+    @NotNull
+    private Long number;
 
     @NotNull
     @Column(name = "DATE_START", nullable = false)
@@ -93,6 +99,14 @@ public class Contract {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public void setNumber(Long number) {
+        this.number = number;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
 
     public void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;

@@ -1,51 +1,54 @@
 package com.company.haulmont.screen.contract;
 
-import com.company.haulmont.app.EmailServiceBean;
 import com.company.haulmont.entity.Contract;
-import io.jmix.email.EmailException;
-import io.jmix.ui.model.DataContext;
+import io.jmix.ui.component.DateField;
+import io.jmix.ui.component.HasValue;
 import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-//TODO при редактировании, клиента менять нельзя.
 @UiController("Contract.edit")
 @UiDescriptor("contract-edit.xml")
 @EditedEntityContainer("contractDc")
 public class ContractEdit extends StandardEditor<Contract> {
 
     /*
-        Contains field names and values that have been changed in the record
-        KEY - names changed attributes
-        VALUE - an array containing the {old, new} attribute values
-         */
-    private final Map<String, Object[]> mapChangesInTheRecord = new HashMap<>();
-
-    //contract creation flag
-    private boolean justCreated;
+            Contains field names and values that have been changed in the record
+            KEY - names changed attributes
+            VALUE - an array containing the {old, new} attribute values
+             */
+    private static final Map<String, Object[]> mapChangesInTheRecord = new HashMap<>();
 
     @Autowired
-    private EmailServiceBean emailServiceBean;
+    private DateField<LocalDateTime> dateStartField;
 
-    @Subscribe
-    public void onInitEntity(InitEntityEvent<Contract> event) {
-        justCreated = true;
-    }
-
-    @Subscribe(target = Target.DATA_CONTEXT)
-    public void onPostCommit(DataContext.PostCommitEvent event) throws EmailException {
-        if (justCreated) {
-            emailServiceBean.sendByEmail(getEditedEntity());
-        }else {
-            emailServiceBean.sendByEmail(mapChangesInTheRecord, getEditedEntity().getClient().getEmail());
-        }
-    }
+    @Autowired
+    private DateField<LocalDate> dateEndField;
 
     @Subscribe(id = "contractDc", target = Target.DATA_CONTAINER)
     public void onContractDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<Contract> event) {
         mapChangesInTheRecord.put(event.getProperty(), new Object[]{event.getPrevValue(),event.getValue()});
+    }
+
+    @Subscribe("dateStartField")
+    public void onDateStartFieldValueChange(HasValue.ValueChangeEvent<LocalDateTime> event) {
+        dateEndField.setRangeStart(Objects.requireNonNull(event.getValue()).toLocalDate().plus(Period.ofDays(1)));
+    }
+
+    @Subscribe
+    public void onBeforeShow(BeforeShowEvent event) {
+        if(dateStartField.isEmpty())
+            dateStartField.setValue(LocalDateTime.now());
+    }
+
+    public static Map<String, Object[]> getMapChangesInTheRecord() {
+        return new HashMap<>(mapChangesInTheRecord);
     }
 }

@@ -44,7 +44,7 @@
 
             </actions>
             <columns>
-                <column id="id"/>
+                <column id="number"/>
                 <column id="dateStart"/>
                 <column id="dateEnd"/>
                 <column id="sumInsured"/>

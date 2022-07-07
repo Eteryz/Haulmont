@@ -17,10 +17,10 @@ public class ContractServiceBean {
     @Autowired
     private DataManager dataManager;
 
-    //return all contracts
+    //return all contracts that expire in a month
     public List<Contract> getContracts(){
         return dataManager.load(Contract.class)
-                .condition(PropertyCondition.equal("dateEnd", LocalDate.now().plus(Period.ofDays(1))))
+                .condition(PropertyCondition.equal("dateEnd", LocalDate.now().plus(Period.ofMonths(1))))
                 .fetchPlan(fpb -> fpb.addFetchPlan(FetchPlan.BASE))
                 .list();
     }

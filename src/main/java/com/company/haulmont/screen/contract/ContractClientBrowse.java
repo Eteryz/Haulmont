@@ -49,6 +49,7 @@ public class ContractClientBrowse extends StandardLookup<Contract> {
                     .list());
             setRowStyleInTable();
         } else {
+            contractsDc.setItems(null);
             notifications.create()
                     .withCaption("Choose a customer")
                     .show();

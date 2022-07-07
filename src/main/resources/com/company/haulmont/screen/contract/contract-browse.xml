@@ -48,6 +48,7 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
+                <column id="number"/>
                 <column id="dateStart"/>
                 <column id="dateEnd"/>
                 <column id="sumInsured"/>
