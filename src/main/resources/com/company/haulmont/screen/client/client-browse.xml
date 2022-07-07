@@ -54,6 +54,7 @@
                 <button id="editBtn" action="clientsTable.edit"/>
                 <button id="removeBtn" action="clientsTable.remove"/>
                 <button id="downloadPassportBtn" enable="false" caption="show passport"/>
+                <button id="showContractsBtn" enable="false" caption="show contracts"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

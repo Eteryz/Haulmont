@@ -75,4 +75,12 @@ public class ContractClientBrowse extends StandardLookup<Contract> {
 
         });
     }
+
+    public void setClientField(Client client){
+        this.clientField.setValue(client);
+    }
+
+    public void setEnabledClientField(boolean flag){
+        this.clientField.setEnabled(flag);
+    }
 }
