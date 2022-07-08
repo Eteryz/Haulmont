@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Haulmont" context="!cuba">
+        <insert tableName="CONTRACT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="7e2c593b-2e4b-4c72-8814-a6599ae14083"/>
+            <column name="NUMBER_" value="1"/>
+            <column name="DATE_START" value="2022-07-09 00:00:00"/>
+            <column name="DATE_END" value="2022-07-11"/>
+            <column name="SUM_INSURED" value="500000"/>
+            <column name="TYPE_INSURED" value="Страхование имущества"/>
+            <column name="RISKS_INSURED" value="Застрахована машина Kia Rio с номером a163мр163"/>
+            <column name="TARIFF_RATE" value="10.5"/>
+            <column name="FILIAL_ID" value="6c9a222b-2e7e-4c12-8754-a6599ae14083"/>
+            <column name="CLIENT_ID" value="6c9e315a-2b7a-4c42-8654-a6599ee14083"/>
+            <column name="version" value="1"/>
+        </insert>
+
+        <insert tableName="CONTRACT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="3c9b791a-9e3b-4e15-9954-e7592ee14083"/>
+            <column name="NUMBER_" value="2"/>
+            <column name="DATE_START" value="2022-07-08 00:00:00"/>
+            <column name="DATE_END" value="2022-08-08"/>
+            <column name="SUM_INSURED" value="1250000"/>
+            <column name="TYPE_INSURED" value="Страхование здоровья человека"/>
+            <column name="RISKS_INSURED" value="Переломы различных тяжестей, травмы головы."/>
+            <column name="TARIFF_RATE" value="7.7"/>
+            <column name="FILIAL_ID" value="3c9b315a-9b1a-4e42-1154-e7592ee14083"/>
+            <column name="CLIENT_ID" value="6c9b315a-2a6a-4c42-8654-a3219ee14083"/>
+            <column name="version" value="1"/>
+        </insert>
+
+        <insert tableName="CONTRACT" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="2b2c915a-1a3e-4c39-8261-a3931ec14083"/>
+            <column name="NUMBER_" value="3"/>
+            <column name="DATE_START" value="2022-06-28 00:00:00"/>
+            <column name="DATE_END" value="2022-07-11"/>
+            <column name="SUM_INSURED" value="8000253"/>
+            <column name="TYPE_INSURED" value="Страхование имущества"/>
+            <column name="RISKS_INSURED" value="Дом полностью застрахован, а также гараж и баня."/>
+            <column name="TARIFF_RATE" value="21.3"/>
+            <column name="FILIAL_ID" value="6b2b315a-5a6e-4c39-7261-a3211ab14083"/>
+            <column name="CLIENT_ID" value="6c9b995a-5a6a-4c42-7261-a3219ab14083"/>
+            <column name="version" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

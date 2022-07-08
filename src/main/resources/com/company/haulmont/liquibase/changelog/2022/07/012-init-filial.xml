@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Haulmont" context="!cuba">
+        <insert tableName="FILIAL" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="6c9a222b-2e7e-4c12-8754-a6599ae14083"/>
+            <column name="NAME" value="АльфаСтрахование"/>
+            <column name="ADDRESS" value="город Самара, ул. Московское шоссе, 105"/>
+            <column name="PHONE" value="+79642315588"/>
+            <column name="EMAIL" value="alpha@mail.ru"/>
+            <column name="version" value="1"/>
+        </insert>
+
+        <insert tableName="FILIAL" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="3c9b315a-9b1a-4e42-1154-e7592ee14083"/>
+            <column name="NAME" value="Росгосстрах"/>
+            <column name="ADDRESS" value="город Самара, ул. Аминева, 8Б"/>
+            <column name="PHONE" value="+79846933660"/>
+            <column name="EMAIL" value="RosGos@gmail.com"/>
+            <column name="version" value="1"/>
+        </insert>
+
+        <insert tableName="FILIAL" dbms="postgresql, mssql, hsqldb">
+            <column name="ID" value="6b2b315a-5a6e-4c39-7261-a3211ab14083"/>
+            <column name="NAME" value="Сбербанк страхование жизни"/>
+            <column name="ADDRESS" value="город Самара, ул. Московское шоссе, 10а"/>
+            <column name="PHONE" value="+79647823156"/>
+            <column name="EMAIL" value="SberLife@mail.ru"/>
+            <column name="version" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
