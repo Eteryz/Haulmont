@@ -7,11 +7,15 @@ import io.jmix.email.EmailException;
 import io.jmix.emailtemplates.EmailTemplates;
 import io.jmix.emailtemplates.exception.ReportParameterTypeChangedException;
 import io.jmix.emailtemplates.exception.TemplateNotFoundException;
+import io.jmix.reports.exception.TemplateGenerationException;
+import io.jmix.reports.runner.ReportRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.io.IOException;
 
 @Component
 public class ContractEventListener {
@@ -22,13 +26,13 @@ public class ContractEventListener {
     @Inject
     EmailTemplates emailTemplates;
 
-
-    public static final String TEMPLATE1_CODE = "create-contract";
+    @Autowired
+    protected ReportRunner reportRunner;
 
     @EventListener
-    public void onContractSaving(EntitySavingEvent<Contract> event) throws TemplateNotFoundException, EmailException, ReportParameterTypeChangedException {
+    public void onContractSaving(EntitySavingEvent<Contract> event) throws TemplateNotFoundException, EmailException, ReportParameterTypeChangedException, TemplateGenerationException, IOException {
         if (event.isNewEntity()) {
-            emailTemplates.buildFromTemplate(TEMPLATE1_CODE)
+            emailTemplates.buildFromTemplate("create-contract1")
                     .setTo(event.getEntity().getClient().getEmail())
                     .setBodyParameter("contract", event.getEntity())
                     .sendEmail();

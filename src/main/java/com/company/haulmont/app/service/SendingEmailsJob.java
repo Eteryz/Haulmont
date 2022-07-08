@@ -9,6 +9,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.stereotype.Service;
 
@@ -25,15 +26,13 @@ public class SendingEmailsJob implements Job {
     @Inject
     EmailTemplates emailTemplates;
 
-    public static final String TEMPLATE1_CODE = "ending-contract";
-
     @Authenticated // authenticates the entire method
     @ManagedOperation
     @Override
     public void execute(JobExecutionContext context) {
         contractServiceBean.getContracts().forEach(x-> {
             try {
-                emailTemplates.buildFromTemplate(TEMPLATE1_CODE)
+                emailTemplates.buildFromTemplate("ending-contract3")
                         .setTo(x.getClient().getEmail())
                         .setBodyParameter("contract", x)
                         .sendEmail();

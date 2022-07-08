@@ -11,6 +11,7 @@ import io.jmix.ui.model.DataContext;
 import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -38,8 +39,6 @@ public class ContractEdit extends StandardEditor<Contract> {
     @Inject
     EmailTemplates emailTemplates;
 
-    public static final String TEMPLATE2_CODE = "edit-contract";
-
     @Subscribe
     public void onInitEntity(InitEntityEvent<Contract> event) {
         justCreated = true;
@@ -48,7 +47,7 @@ public class ContractEdit extends StandardEditor<Contract> {
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPostCommit(DataContext.PostCommitEvent event) throws TemplateNotFoundException, EmailException, ReportParameterTypeChangedException {
         if (!justCreated) {
-            emailTemplates.buildFromTemplate(TEMPLATE2_CODE)
+            emailTemplates.buildFromTemplate("edit-contract2")
                     .setTo(getEditedEntity().getClient().getEmail())
                     .setBodyParameter("contract", getEditedEntity())
                     .setBodyParameter("str", editContractToString(mapChangesInTheRecord))

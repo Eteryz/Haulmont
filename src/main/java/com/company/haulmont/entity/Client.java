@@ -42,7 +42,7 @@ public class Client {
     @NotNull
     private byte[] passport;
 
-    @Pattern(message = "Invalid phone number", regexp = "^((\\+7|7|8)+([0-9]){10})$")
+    @Pattern(regexp = "^((\\+7|7|8)+([0-9]){10})$")
     @Column(name = "PHONE", nullable = false, length = 20)
     @NotNull
     private String phone;

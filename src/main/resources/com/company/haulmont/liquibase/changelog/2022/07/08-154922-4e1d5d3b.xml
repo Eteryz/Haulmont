@@ -12,4 +12,18 @@
 
         <addNotNullConstraint columnName="NUMBER_" defaultNullValue="0" tableName="CONTRACT"/>
     </changeSet>
+    <changeSet id="2" author="Haulmont">
+        <dropColumn columnName="DATE_END" tableName="CONTRACT"/>
+    </changeSet>
+    <changeSet id="3" author="Haulmont">
+        <addColumn tableName="CONTRACT">
+            <column name="DATE_END" type="DATE">
+                <constraints nullable="false" validateNullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="4" author="Haulmont">
+        <addNotNullConstraint columnDataType="DECIMAL(19, 2)" columnName="SUM_INSURED" tableName="CONTRACT"
+                              validate="true"/>
+    </changeSet>
 </databaseChangeLog>
