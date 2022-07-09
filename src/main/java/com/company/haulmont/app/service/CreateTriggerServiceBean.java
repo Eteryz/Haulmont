@@ -10,16 +10,24 @@ public class CreateTriggerServiceBean {
     @Autowired
     private Scheduler scheduler;
 
-    public void addTaskWithTrigger(String nameJob, String groupJob, String nameTrigger, String groupTrigger, ScheduleBuilder responseTime) throws SchedulerException {
-        // define the job and tie it to our SendingEmailJob class
-        JobDetail job = JobBuilder.newJob(SendingEmailsJob.class)
-                .withIdentity(nameJob, groupJob)
-                .build();
-        Trigger trigger = TriggerBuilder.newTrigger()
-                .withIdentity(nameTrigger, groupTrigger)
-                .withSchedule(responseTime)
-                .build();
-        scheduler.scheduleJob(job,trigger);
+    public void createJob(String nameJob, String groupJob,Class jobHandleClass, Trigger trigger) throws SchedulerException {
+        if (!scheduler.checkExists(new JobKey(nameJob,groupJob))) {
+            JobDetail jobDetail = JobBuilder.newJob(jobHandleClass)
+                    .withIdentity(nameJob, groupJob)
+                    .build();
+            scheduler.scheduleJob(jobDetail, trigger);
+        }
+    }
 
+    public Trigger createTrigger(String nameTrigger, String groupTrigger, ScheduleBuilder responseTime) throws SchedulerException {
+        TriggerKey triggerKey = new TriggerKey(nameTrigger,groupTrigger);
+        if(!scheduler.checkExists(triggerKey)){
+            return TriggerBuilder.newTrigger()
+                    .withIdentity(nameTrigger, groupTrigger)
+                    .withSchedule(responseTime)
+                    .build();
+        } else {
+            return scheduler.getTrigger(triggerKey);
+        }
     }
 }

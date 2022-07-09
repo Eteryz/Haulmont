@@ -30,6 +30,7 @@ public class SendingEmailsJob implements Job {
     @ManagedOperation
     @Override
     public void execute(JobExecutionContext context) {
+        log.info("SendingEmailJob - task completed!");
         contractServiceBean.getContracts().forEach(x-> {
             try {
                 emailTemplates.buildFromTemplate("ending-contract3")

@@ -2,6 +2,8 @@ package com.company.haulmont.screen.main;
 
 import com.company.haulmont.app.service.CreateTemplateServiceBean;
 import com.company.haulmont.app.service.CreateTriggerServiceBean;
+import com.company.haulmont.app.service.SendingEmailsJob;
+import io.jmix.core.DataManager;
 import io.jmix.ui.ScreenTools;
 import io.jmix.ui.component.AppWorkArea;
 import io.jmix.ui.component.Button;
@@ -10,6 +12,10 @@ import io.jmix.ui.component.mainwindow.Drawer;
 import io.jmix.ui.icon.JmixIcon;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.JobDetail;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -20,24 +26,39 @@ import java.io.IOException;
 public class MainScreen extends Screen implements Window.HasWorkArea{
 
     @Autowired
+    protected DataManager dataManager;
+
+    @Autowired
     private CreateTemplateServiceBean createTemplateServiceBean;
 
     @Autowired
     private CreateTriggerServiceBean createTriggerServiceBean;
 
     @Subscribe
-    public void onAfterShow1(AfterShowEvent event) throws IOException {
+    public void onAfterShow1(AfterShowEvent event) throws IOException, SchedulerException {
         String TEMPLATE1_CODE = "create-contract1";
         String TEMPLATE_SUBJECT = "Important information from the insurance company!";
-        createTemplateServiceBean.createTemplate("Temp1", TEMPLATE_SUBJECT, TEMPLATE1_CODE,"/com/company/haulmont/template/template1.html");
+
+        createTemplateServiceBean.createTemplate("Temp1",
+                TEMPLATE_SUBJECT,
+                TEMPLATE1_CODE,
+                "/com/company/haulmont/template/template1.html");
+
         String TEMPLATE2_CODE = "edit-contract2";
-        createTemplateServiceBean.createTemplate("Temp2", TEMPLATE_SUBJECT, TEMPLATE2_CODE,"/com/company/haulmont/template/template2.html");
+        createTemplateServiceBean.createTemplate("Temp2"
+                , TEMPLATE_SUBJECT,
+                TEMPLATE2_CODE,
+                "/com/company/haulmont/template/template2.html");
+
         String TEMPLATE3_CODE = "ending-contract3";
-        createTemplateServiceBean.createTemplate("Temp3", TEMPLATE_SUBJECT, TEMPLATE3_CODE,"/com/company/haulmont/template/template3.html");
+        createTemplateServiceBean.createTemplate("Temp3",
+                TEMPLATE_SUBJECT,
+                TEMPLATE3_CODE,
+                "/com/company/haulmont/template/template3.html");
 
-        createTriggerServiceBean.createTrigger();
+        Trigger trigger = createTriggerServiceBean.createTrigger("myTrigger", "group1", CronScheduleBuilder.dailyAtHourAndMinute(12, 0));
+        createTriggerServiceBean.createJob("myJob", "group1", SendingEmailsJob.class, trigger);
     }
-
     @Autowired
     private ScreenTools screenTools;
 

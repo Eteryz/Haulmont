@@ -27,7 +27,7 @@
             <insert tableName="CLIENT" dbms="postgresql, mssql, hsqldb">
                 <column name="ID" value="6c9b995a-5a6a-4c42-7261-a3219ab14083"/>
                 <column name="FULL_NAME" value="БОЛДЫРЕВА ТАТЬЯНА СЕРГЕЕВНА"/>
-                <column name="EMAIL" value="VladislavPozhar@yandex.ru"/>
+                <column name="EMAIL" value="TatanaBold@yandex.ru"/>
                 <column name="PHONE" value="+78005553535"/>
                 <column name="PASSPORT" value="sdfs21fdsf3"/>
                 <column name="version" value="1"/>

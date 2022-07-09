@@ -18,7 +18,10 @@ public class CreateTemplateServiceBean {
     @Autowired
     private DataManager dataManager;
 
-    public void createTemplate(String templateName, String templateSubject, String templateCode, String pathToHtml) throws IOException {
+    public void createTemplate(String templateName,
+                               String templateSubject,
+                               String templateCode,
+                               String pathToHtml) throws IOException {
         JsonEmailTemplate jsonEmailTemplate = dataManager.create(JsonEmailTemplate.class);
         jsonEmailTemplate.setSubject(templateSubject);
         jsonEmailTemplate.setCode(templateCode);
