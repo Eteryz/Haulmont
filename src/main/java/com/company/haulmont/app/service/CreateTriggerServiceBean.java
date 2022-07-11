@@ -10,7 +10,7 @@ public class CreateTriggerServiceBean {
     @Autowired
     private Scheduler scheduler;
 
-    public void createJob(String nameJob, String groupJob,Class jobHandleClass, Trigger trigger) throws SchedulerException {
+    public void createJob(String nameJob, String groupJob,Class<? extends Job> jobHandleClass, Trigger trigger) throws SchedulerException {
         if (!scheduler.checkExists(new JobKey(nameJob,groupJob))) {
             JobDetail jobDetail = JobBuilder.newJob(jobHandleClass)
                     .withIdentity(nameJob, groupJob)
@@ -19,7 +19,7 @@ public class CreateTriggerServiceBean {
         }
     }
 
-    public Trigger createTrigger(String nameTrigger, String groupTrigger, ScheduleBuilder responseTime) throws SchedulerException {
+    public Trigger createTrigger(String nameTrigger, String groupTrigger, CronScheduleBuilder responseTime) throws SchedulerException {
         TriggerKey triggerKey = new TriggerKey(nameTrigger,groupTrigger);
         if(!scheduler.checkExists(triggerKey)){
             return TriggerBuilder.newTrigger()
